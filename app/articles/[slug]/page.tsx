@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Header } from "@/components/header"
 import { RichTextRenderer } from "@/components/rich-text-renderer"
 import {
   User,
@@ -136,7 +135,6 @@ export default async function ArticleDetailPage({
   if (!data) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <main className="mx-auto max-w-4xl px-4 py-16 text-center">
           <h1 className="mb-4 text-2xl font-bold text-foreground">Article Not Found</h1>
           <p className="mb-8 text-muted-foreground">
@@ -155,8 +153,7 @@ export default async function ArticleDetailPage({
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
