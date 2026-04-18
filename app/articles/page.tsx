@@ -1,7 +1,6 @@
 import { Suspense } from "react"
 import { headers } from "next/headers"
 import type { Metadata } from "next"
-import { Header } from "@/components/header"
 import { ArticleList } from "@/components/article-list"
 // TODO: Switch to real Contentful service when Article content type is available
 // import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.service"
@@ -26,7 +25,7 @@ export default async function ArticlesPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const params = await searchParams
-  
+
   const page = Number(params?.page) || 1
   const search = typeof params?.search === "string" ? params.search : ""
   const category = typeof params?.category === "string" ? params.category : ""
@@ -48,8 +47,7 @@ export default async function ArticlesPage({
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
