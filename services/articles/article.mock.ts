@@ -326,7 +326,7 @@ const DUMMY_ARTICLES = [
       sys: { id: "img-5" },
       title: "Ramadan",
       description: "Dates and Quran representing Ramadan",
-      url: "https://images.unsplash.com/photo-1532635241-17e820acc59f?w=800&h=600&fit=crop",
+      url: "https://images.unsplash.com/photo-1548352599-413c8b2703d1?q=80&w=870&auto=format&fit=crop",
       width: 800,
       height: 600
     }
@@ -530,7 +530,7 @@ const DUMMY_ARTICLES = [
       sys: { id: "img-9" },
       title: "Heart Purification",
       description: "Peaceful Islamic setting",
-      url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop",
+      url: "https://images.unsplash.com/photo-1689615056451-107d2085df1b?q=80&w=800&auto=format&fit=crop",
       width: 800,
       height: 600
     }
@@ -594,15 +594,15 @@ const DUMMY_ARTICLES = [
 
 const filterArticles = (articles: typeof DUMMY_ARTICLES, search: string, category: string) => {
   return articles.filter(article => {
-    const matchesSearch = !search || 
+    const matchesSearch = !search ||
       article.title.toLowerCase().includes(search.toLowerCase()) ||
       article.excerpt.toLowerCase().includes(search.toLowerCase()) ||
       article.author.toLowerCase().includes(search.toLowerCase()) ||
       article.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()));
-    
-    const matchesCategory = !category || 
+
+    const matchesCategory = !category ||
       article.category.toLowerCase() === category.toLowerCase();
-    
+
     return matchesSearch && matchesCategory;
   });
 };
@@ -623,21 +623,21 @@ export const getArticlesBase = cache(async ({
   category?: string;
   isPreview?: boolean;
 }): Promise<{ articleCollection: any }> => {
-  
+
   // Simulate API delay for realistic behavior
   await new Promise(resolve => setTimeout(resolve, 100));
-  
+
   let filtered = filterArticles(DUMMY_ARTICLES, search, category);
   const total = filtered.length;
-  
+
   if (skip > 0) {
     filtered = filtered.slice(skip);
   }
-  
+
   if (limit > 0) {
     filtered = filtered.slice(0, limit);
   }
-  
+
   return {
     articleCollection: {
       items: filtered,
@@ -694,9 +694,9 @@ export const getAllArticles = cache(async ({
 });
 
 export const getArticleSlugs = cache(async (): Promise<any> => {
-  
+
   await new Promise(resolve => setTimeout(resolve, 50));
-  
+
   return {
     items: DUMMY_ARTICLES.map(article => ({ slug: article.slug }))
   };
@@ -708,11 +708,11 @@ export const getArticleBySlug = cache(async ({
   slug: string;
   isPreview?: boolean;
 }): Promise<any> => {
-  
+
   await new Promise(resolve => setTimeout(resolve, 100));
-  
+
   const article = DUMMY_ARTICLES.find(a => a.slug === slug);
-  
+
   return {
     data: article || null,
     total: article ? 1 : 0
@@ -730,9 +730,9 @@ export const getRelatedArticles = cache(async ({
   totalArticles?: number;
   limit?: number;
 }): Promise<any> => {
-  
+
   await new Promise(resolve => setTimeout(resolve, 100));
-  
+
   // Filter out current article and prioritize same category
   const related = DUMMY_ARTICLES
     .filter(article => article.slug !== currentSlug)
@@ -746,7 +746,7 @@ export const getRelatedArticles = cache(async ({
       return 0;
     })
     .slice(0, limit);
-  
+
   return related;
 });
 
@@ -804,7 +804,7 @@ export const createArticleJsonLd = (data: any) => {
 
 export const CATEGORIES = [
   "Education",
-  "Fundamentals", 
+  "Fundamentals",
   "Aqeedah",
   "Seerah",
   "Worship",
