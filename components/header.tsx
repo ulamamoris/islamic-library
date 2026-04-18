@@ -29,18 +29,12 @@ export function Header() {
           >
             Home
           </a>
-          {/* <a
-            href="/"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Lectures
-          </a>
           <a
-            href="#"
+            href="/articles"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Scholars
-          </a> */}
+            Articles
+          </a>
           <a
             href="/about"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -78,12 +72,9 @@ export function Header() {
             <a href="/" className="rounded-lg px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
               Home
             </a>
-            {/* <a href="#" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-              Lectures
+            <a href="/articles" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
+              Articles
             </a>
-            <a href="#" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
-              Scholars
-            </a> */}
             <a href="/about" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
               About
             </a>

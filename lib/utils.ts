@@ -85,7 +85,7 @@ export const cleanDescription = (html?: string) => {
 
 
 export function createQueryString(
-  searchParams: URLSearchParams,
+  searchParams: URLSearchParams | ReadonlyURLSearchParams,
   updates: Record<string, string | null>
 ) {
   const params = new URLSearchParams(searchParams.toString())
