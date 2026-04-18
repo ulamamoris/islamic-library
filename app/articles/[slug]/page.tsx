@@ -10,7 +10,9 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { arrayify } from "@/lib/utils"
-import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.service"
+// TODO: Switch to real Contentful service when Article content type is available
+// import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.service"
+import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.mock"
 import dayjs from "dayjs"
 import CONFIG from "@/config/config.json"
 import { Suspense } from "react"
@@ -105,7 +107,7 @@ function RelatedArticleCard({
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-3.5 w-3.5 text-primary" />
-            <span>{dayjs(item?.date).format(CONFIG.bayaan.displayFormat)}</span>
+            <span>{dayjs(item?.date).format(CONFIG.article.displayFormat)}</span>
           </div>
         </div>
       </article>
@@ -201,7 +203,7 @@ export default async function ArticleDetailPage({
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-primary" />
-              <time>{dayjs(data?.date).format(CONFIG.bayaan.displayFormat)}</time>
+              <time>{dayjs(data?.date).format(CONFIG.article.displayFormat)}</time>
             </div>
             <div className="flex items-center gap-2">
               <User className="h-4 w-4 text-primary" />

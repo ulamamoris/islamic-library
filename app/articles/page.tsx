@@ -3,7 +3,9 @@ import { headers } from "next/headers"
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { ArticleList } from "@/components/article-list"
-import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.service"
+// TODO: Switch to real Contentful service when Article content type is available
+// import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.service"
+import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.mock"
 
 export const metadata: Metadata = {
   title: "Islamic Articles | Ulama Moris",

@@ -31,7 +31,7 @@ export function ArticleList({
 
   const [isPending, startTransition] = useTransition()
 
-  const ITEMS_PER_PAGE = isMobile ? CONFIG.bayaan.pageSize.mobile : CONFIG.bayaan.pageSize.desktop
+  const ITEMS_PER_PAGE = isMobile ? CONFIG.article.pageSize.mobile : CONFIG.article.pageSize.desktop
   const totalArticles = articleList?.total || 1
 
   const debounceOptions = useMemo(() => ({
