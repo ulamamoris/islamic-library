@@ -9,8 +9,7 @@ export default gql`fragment ArticleFields on Article {
   slug
   excerpt
   author
-  date
-  body {
+  content {
     json
     links {
       assets {
@@ -21,9 +20,6 @@ export default gql`fragment ArticleFields on Article {
     }
   }
   category
-  tags
-  metaTitle
-  metaDescription
   coverImage {
     ...AssetsFields
   }
