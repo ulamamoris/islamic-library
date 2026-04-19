@@ -2,9 +2,7 @@ import { Suspense } from "react"
 import { headers } from "next/headers"
 import type { Metadata } from "next"
 import { ArticleList } from "@/components/article-list"
-// TODO: Switch to real Contentful service when Article content type is available
-// import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.service"
-import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.mock"
+import { getArticlesWithPagination, createArticleListJsonLd } from "@/services/articles/article.service"
 
 export const metadata: Metadata = {
   title: "Islamic Articles | Ulama Moris",

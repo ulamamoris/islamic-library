@@ -9,9 +9,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { arrayify } from "@/lib/utils"
-// TODO: Switch to real Contentful service when Article content type is available
-// import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.service"
-import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.mock"
+import { getArticleBySlug, getArticleSlugs, getRelatedArticles, createArticleJsonLd } from "@/services/articles/article.service"
 import dayjs from "dayjs"
 import CONFIG from "@/config/config.json"
 import { Suspense } from "react"
