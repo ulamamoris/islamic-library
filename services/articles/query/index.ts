@@ -1,4 +1,4 @@
-export { default as ArticleFragment } from "./article.fragment";
+export { ArticleContentFields, ArticleFieldsRichText, ArticleFieldsNORichText } from "./article.fragment";
 export { default as ArticleQuery } from "./article.query";
 export { default as ArticleBySlugQuery } from "./articleBySlug.query";
 export { default as ArticleSlugQuery } from "./articleSlug.query";

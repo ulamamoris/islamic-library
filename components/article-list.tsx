@@ -5,7 +5,7 @@ import { ArticleCard } from "@/components/article-card"
 import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 import CONFIG from "@/config/config.json"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { cn, createQueryString } from "@/lib/utils"
+import { createQueryString } from "@/lib/utils"
 import { useDebouncedCallback } from "@/hooks/use-debounce"
 
 export function ArticleList({

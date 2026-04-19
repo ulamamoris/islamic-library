@@ -1,7 +1,7 @@
 {
    "meta": {
-      "title": "Listen to Qur'an, Hadith & Islamic Lectures | Ulama Moris",
-      "description": "Listen to Qur'an recitations, Hadith, and Islamic lectures about Prophet Muhammad (s.a.w). Learn Islam through our Ulama and grow spiritually with authentic Islamic audio."
+      "title": "Listen to Qur’an, Hadith & Islamic Lectures | Ulama Moris",
+      "description": "Listen to Qur’an recitations, Hadith, and Islamic lectures about Prophet Muhammad (s.a.w). Learn Islam through our Ulama and grow spiritually with authentic Islamic audio."
    },
    "bayaan": {
       "pageSize": {
@@ -16,14 +16,6 @@
          "mobile": 6,
          "desktop": 9
       },
-      "displayFormat": "DD MMMM YYYY"
-   },
-   "bayaan": {
-      "pageSize": {
-         "mobile": 6,
-         "desktop": 8
-      },
-      "dateFilterFormat": "YYYY-MM-DD",
       "displayFormat": "DD MMMM YYYY"
    },
    "filter": {

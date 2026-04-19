@@ -37,18 +37,18 @@ export async function generateMetadata(
   const openGraph = (await parent).openGraph || {}
 
   return {
-    title: data?.metaTitle || data?.title || "",
-    description: data?.metaDescription || data?.excerpt || "",
+    title: data?.title || "",
+    description: data?.excerpt || "",
     authors: [{ name: data?.author || "" }],
     openGraph: {
       ...openGraph,
-      title: data?.metaTitle || data?.title || "",
-      description: data?.metaDescription || data?.excerpt || "",
-      url: `https://ulama-moris.org/articles/${slug}`,
+      title: data?.title || "",
+      description: data?.excerpt || "",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}articles/${slug}`,
       images: data?.coverImage?.url ? [{ url: data.coverImage.url }] : [],
     },
     alternates: {
-      canonical: `https://ulama-moris.org/articles/${slug}`
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/articles/${slug}`
     }
   }
 }
@@ -65,11 +65,14 @@ async function RelatedArticlesSection({
   }
 
   return (
-    <>
-      {relatedArticles.map((item: any) => (
-        <RelatedArticleCard key={item?.sys?.id} item={item} slug={item?.slug} />
-      ))}
-    </>
+    <section className="mb-10">
+      <h2 className="mb-6 text-xl font-semibold text-foreground">More Articles</h2>
+      <div className="grid gap-4 sm:grid-cols-2 auto-rows-fr">
+        {relatedArticles.map((item: any) => (
+          <RelatedArticleCard key={item?.sys?.id} item={item} slug={item?.slug} />
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -124,7 +127,6 @@ export default async function ArticleDetailPage({
   const relatedArticlesPromise = getRelatedArticles({
     currentSlug: slug,
     category: data?.category,
-    tags: data?.tags,
     totalArticles: total
   })
 
@@ -170,21 +172,12 @@ export default async function ArticleDetailPage({
 
         {/* Header Section */}
         <header className="mb-8">
-          {/* Category & Tags */}
-          {(data?.category || (data?.tags && data.tags.length > 0)) && (
+          {/* Category */}
+          {(data?.category && data.category.length > 0) && (
             <div className="mb-4 flex flex-wrap items-center gap-2">
-              {data?.category && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
-                  {data.category}
-                </span>
-              )}
-              {data?.tags && arrayify(data.tags).map((tag: string, idx: number) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground"
-                >
-                  <Tag className="h-3 w-3" />
-                  {tag}
+              {arrayify(data.category).map((category: string, idx: number) => (
+                <span key={idx} className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
+                  {category}
                 </span>
               ))}
             </div>
@@ -198,7 +191,7 @@ export default async function ArticleDetailPage({
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-primary" />
-              <time>{dayjs(data?.date).format(CONFIG.article.displayFormat)}</time>
+              <time>{dayjs(data?.sys.publishedAt).format(CONFIG.article.displayFormat)}</time>
             </div>
             <div className="flex items-center gap-2">
               <User className="h-4 w-4 text-primary" />
@@ -222,9 +215,9 @@ export default async function ArticleDetailPage({
         )}
 
         {/* Article Body */}
-        {data?.body && (
+        {data?.content && (
           <article className="mb-10">
-            <RichTextRenderer content={data.body} />
+            <RichTextRenderer content={data?.content} />
           </article>
         )}
 
@@ -245,12 +238,7 @@ export default async function ArticleDetailPage({
             </div>
           </section>
         }>
-          <section className="mb-10">
-            <h2 className="mb-6 text-xl font-semibold text-foreground">More Articles</h2>
-            <div className="grid gap-4 sm:grid-cols-2 auto-rows-fr">
-              <RelatedArticlesSection relatedArticlesPromise={relatedArticlesPromise} />
-            </div>
-          </section>
+          <RelatedArticlesSection relatedArticlesPromise={relatedArticlesPromise}/>
         </Suspense>
       </main>
     </div>

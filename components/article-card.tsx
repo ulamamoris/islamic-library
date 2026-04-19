@@ -3,7 +3,7 @@
 import { Calendar, User, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import dayjs from "dayjs"
-import { arrayify, cn } from "@/lib/utils"
+import { arrayify } from "@/lib/utils"
 import CONFIG from "@/config/config.json"
 import Image from "next/image"
 
@@ -53,7 +53,7 @@ export function ArticleCard({
         <div className="flex justify-between border-b border-border bg-secondary/30 px-5 py-2.5 md:py-3">
           <div className="flex items-center gap-2">
             {arrayify(category).slice(0, 3).map((tag, idx) => (
-              <span className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
+              <span key={idx} className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
                 {category}
               </span>
             ))}

@@ -5,12 +5,14 @@ import Config from "@/config/config.json";
 import { WithContext, Article as SchemaArticle, ItemList, Person } from 'schema-dts';
 
 import {
-  ArticleFragment,
   ArticleQuery,
   ArticleSlugQuery,
   ArticleBySlugQuery,
   ArticleTotalQuery,
-  RelatedArticlesQuery
+  RelatedArticlesQuery,
+  ArticleFieldsNORichText,
+  ArticleFieldsRichText,
+  ArticleContentFields
 } from "./query";
 
 import { AssetsFragment } from '@/services/query';
@@ -31,7 +33,7 @@ export const getArticlesBase = cache(async ({
 
   const QUERY = gql`
     ${AssetsFragment}
-    ${ArticleFragment}
+    ${ArticleFieldsNORichText}
     ${ArticleQuery}
   `;
 
@@ -124,18 +126,23 @@ export const getArticleBySlug = cache(async ({
 
   const QUERY = gql`
     ${AssetsFragment}
-    ${ArticleFragment}
+    ${ArticleContentFields}
+    ${ArticleFieldsRichText}
     ${ArticleBySlugQuery}
   `;
 
-  const result = await ExecuteQuery(QUERY, {
+  const resultPromise = ExecuteQuery(QUERY, {
     variables: { slug },
     preview: isPreview,
   });
 
+  const totalPromise = getTotalArticles();
+
+  const [result, total] = await Promise.all([resultPromise, totalPromise]);
+
   return {
     data: result?.articleCollection?.items?.[0],
-    total: result?.articleCollection?.total
+    total: total
   };
 });
 
@@ -173,20 +180,18 @@ const selectUniqueArticles = (data: any[], limit = 4) => {
 export const getRelatedArticles = cache(async ({
   currentSlug,
   category,
-  tags,
   totalArticles,
   limit = 4
 }: {
   currentSlug: string;
   category?: string;
-  tags?: string[];
   totalArticles: number;
   limit?: number;
 }, isPreview: boolean = false): Promise<any> => {
 
   const RELATED_QUERY = gql`
     ${AssetsFragment}
-    ${ArticleFragment}
+    ${ArticleFieldsNORichText}
     ${RelatedArticlesQuery}
   `;
 
@@ -202,16 +207,15 @@ export const getRelatedArticles = cache(async ({
     variables: {
       currentSlug,
       category,
-      tags,
-      skip: randomSkip,
-      limit
+      limit,
+      skip: randomSkip
     },
     preview: isPreview,
   });
 
+
   const sortedResult = selectUniqueArticles([
     result?.category?.items || [],
-    result?.tags?.items || [],
     result?.random?.items || []
   ]);
 

@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Islamic Articles | Ulama Moris",
     description: "Read Islamic articles on various topics including Qur'an, Hadith, Fiqh, and Islamic spirituality from respected scholars.",
-    url: "https://ulama-moris.org/articles",
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/articles`,
   },
   alternates: {
-    canonical: "https://ulama-moris.org/articles"
+    canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/articles`
   }
 }
 
