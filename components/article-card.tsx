@@ -14,8 +14,7 @@ interface ArticleCardProps {
   excerpt?: string;
   author: string;
   date: string;
-  category?: string;
-  tags?: string[];
+  category?: string[];
   coverImage?: {
     url: string;
     title?: string;
@@ -32,7 +31,6 @@ export function ArticleCard({
   author,
   date,
   category,
-  tags,
   coverImage
 }: ArticleCardProps) {
   return (
@@ -51,12 +49,14 @@ export function ArticleCard({
       )}
 
       {/* Category Badge */}
-      {category && (
+      {category && category?.length > 0 && (
         <div className="flex justify-between border-b border-border bg-secondary/30 px-5 py-2.5 md:py-3">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
-              {category}
-            </span>
+            {arrayify(category).slice(0, 3).map((tag, idx) => (
+              <span className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground border-border">
+                {category}
+              </span>
+            ))}
           </div>
         </div>
       )}
@@ -88,20 +88,6 @@ export function ArticleCard({
             <time>{dayjs(date).format(CONFIG.bayaan.displayFormat)}</time>
           </div>
         </div>
-
-        {/* Tags */}
-        {tags && tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-1.5">
-            {arrayify(tags).slice(0, 3).map((tag, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs text-muted-foreground"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
 
         {/* Read More Link */}
         <Link

@@ -147,9 +147,8 @@ export function ArticleList({
                   slug={item.slug}
                   excerpt={item.excerpt}
                   author={item.author}
-                  date={item.date}
+                  date={item.sys.publishedAt}
                   category={item.category}
-                  tags={item.tags}
                   coverImage={item.coverImage}
                 />
               </div>
@@ -189,11 +188,10 @@ export function ArticleList({
                   <button
                     key={page}
                     onClick={() => goToPage(page)}
-                    className={`flex h-10 w-10 items-center justify-center cursor-pointer rounded-full text-sm font-medium transition-colors ${
-                      currentPage === page
+                    className={`flex h-10 w-10 items-center justify-center cursor-pointer rounded-full text-sm font-medium transition-colors ${currentPage === page
                         ? "bg-primary text-primary-foreground shadow-md"
                         : "border border-border bg-card text-foreground hover:bg-secondary"
-                    }`}
+                      }`}
                   >
                     {page}
                   </button>
