@@ -1,3 +1,4 @@
+import { ReadonlyURLSearchParams } from "next/navigation";
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -6,8 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-import { ReadonlyURLSearchParams } from "next/navigation";
-import { useCallback } from 'react';
 
 export const toISODuration = (timeStr: string) => {
   if (!timeStr) return;
@@ -25,12 +24,15 @@ export const toISODuration = (timeStr: string) => {
   }
 
   let iso = "PT";
+
   if (hours) iso += hours + "H";
-  if (minutes) iso += minutes + "M";
-  if (seconds) iso += seconds + "S";
+
+  // Always include minutes and seconds
+  iso += minutes + "M";
+  iso += seconds + "S";
 
   return iso;
-}
+};
 
 
 export const toTitleCase = (str: string) => {
